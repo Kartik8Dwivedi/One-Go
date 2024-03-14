@@ -7,6 +7,7 @@ import {
   autocomplete,
   translateText,
   getLanguages,
+  translateJson,
 } from "../../Controllers/stations.controller.js";
 
 const router = express.Router();
@@ -18,6 +19,7 @@ router.get("/fare", getFare);
 router.get("/autocomplete", autocomplete);
 router.post("/translate", translateText)
 router.get("/languages", getLanguages);
+router.post("/translate-json", translateJson)
 
 
 export default router;

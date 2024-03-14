@@ -154,5 +154,32 @@ class Stations {
        throw new Error(error);
     }
   }
+
+  async translateJson({ from, to, json }){
+    try {
+      const encodedParams = new URLSearchParams();
+      encodedParams.set("from", from);
+      encodedParams.set("to", to);
+      encodedParams.set("json", json);
+      encodedParams.set("protected_paths[0]", "extra.last_comment.author");
+
+      const options = {
+        method: "POST",
+        url: Config.TranslateJsonUri,
+        headers: {
+          "content-type": "application/x-www-form-urlencoded",
+          "X-RapidAPI-Key": Config.TranslateKEY,
+          "X-RapidAPI-Host": Config.TranslateHost,
+        },
+        data: encodedParams,
+      };
+
+      const response = await axios.request(options);
+
+      return response.data.trans;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
 }
 export default Stations;

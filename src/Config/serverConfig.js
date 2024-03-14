@@ -20,4 +20,5 @@ export default {
   TranslateKEY: process.env.RAPID_API_KEY_TRANSLATE,
   TranslateHost: process.env.RAPID_API_HOST_TRANSLATE,
   LanguagesURI: process.env.LANGUAGES_URI,
+  TranslateJsonUri: process.env.TRANSLATE_JSON_URI,
 };

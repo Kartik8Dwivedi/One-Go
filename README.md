@@ -34,4 +34,15 @@
     - Body -> from, to and text
 
 - GET ALL LANGUAGES
-    - URL : 
+    - URL : http://localhost:3007/api/v1/languages
+    - GET request
+    - No body required
+
+- GET TRANSLATED JSON OBJECT 
+    - URL : http://localhost:3007/api/v1/translate-json
+    - POST request
+    - Body -> from, to and json (example: en hi and jsonObject= { 
+                                      "title": "The importance of Regular Exercise",
+                                      "author": "Kartik Dwivedi"
+                                  }
+                                )
