@@ -22,3 +22,8 @@
   - URL : http://localhost:3007/api/v1/fare
   - GET request
   - Body -> trainNo, from and to (example: 19038 ST BVI)
+
+- GET AUTOCOMPLETE RESULTS
+    - URL : http://localhost:3007/api/v1/autocomplete
+    - GET request
+    - Body -> query (example: Delh -> provides result for delhi)

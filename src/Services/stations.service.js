@@ -88,5 +88,30 @@ class Stations {
       throw new Error(error);
     }
   }
+
+  async autocomplete(query){
+    try {
+        console.log("query in service layer: ", query)
+        console.log("typeof query: ", typeof query)
+        const options = {
+          method: "GET",
+          url: Config.AutoCompleteURI,
+          params: {
+            input: query,
+            radius: "500",
+          },
+          headers: {
+            "X-RapidAPI-Key": Config.AutoCompleteKey,
+            "X-RapidAPI-Host": Config.RapidAPIHostAutocomplete,
+          },
+        };
+
+        const response = await axios.request(options);
+
+        return response.data.predictions;
+    } catch (error) {
+        throw new Error(error);
+    }
+  }
 }
 export default Stations;

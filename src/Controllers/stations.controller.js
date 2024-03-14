@@ -3,6 +3,7 @@ import { appError, appSuccess } from "../Config/response.js";
 
 const stations = new Stations();
 
+// * api
 export const getStations = async (req, res) => {
   try {
     if (!req.body || Object.keys(req.body).length === 0) {
@@ -32,6 +33,7 @@ export const getStations = async (req, res) => {
   }
 };
 
+// * api
 export const trainsBetweenStations = async (req, res) => {
   try {
     const validationResult = validate(req.body);
@@ -89,6 +91,7 @@ const isValidDateFormat = (date) => {
   return dateFormat.test(date);
 };
 
+// * api
 export const trainLiveStatus = async (req, res) => {
   try {
     if (!req.body || Object.keys(req.body).length === 0) {
@@ -115,6 +118,7 @@ export const trainLiveStatus = async (req, res) => {
   }
 };
 
+// * api
 export const getFare = async (req, res) => {
   try {
     const validationResult = validateFare(req.body, res);
@@ -147,4 +151,36 @@ const validateFare = (body, res) => {
     );
   }
   return true;
+};
+
+export const autocomplete = async (req, res) => {
+  try {
+    if (!req.body || Object.keys(req.body).length === 0) {
+      console.log("Request body was empty, returning from controller layer");
+      return appError(
+        res,
+        400,
+        "Request body is empty",
+        "query attribute is required"
+      );
+    }
+    if (!req.body.query) {
+      return appError(
+        res,
+        400,
+        "Payload validation error",
+        "Attribute 'query' is required"
+      );
+    }
+    const autocompleteResults = await stations.autocomplete(req.body.query);
+    return appSuccess(
+      res,
+      200,
+      autocompleteResults,
+      "Autocomplete results fetched successfully"
+    );
+  } catch (error) {
+    console.log("Error in autocomplete controller layer: ", error);
+    return appError(res, 500, error.message, "Internal server error");
+  }
 };
