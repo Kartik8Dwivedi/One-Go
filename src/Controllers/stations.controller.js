@@ -36,7 +36,7 @@ export const getStations = async (req, res) => {
 // * api
 export const trainsBetweenStations = async (req, res) => {
   try {
-    const validationResult = validate(req.body);
+    const validationResult = validate(req.body,res);
     if (validationResult !== true) return validationResult;
 
     const { from, to, date } = req.body;
@@ -54,9 +54,10 @@ export const trainsBetweenStations = async (req, res) => {
   }
 };
 
-const validate = (body) => {
+const validate = (body, res) => {
   if (!body || Object.keys(body).length === 0) {
     return appError(
+      res,
       400,
       "Request body is empty",
       "from, to and date parameters are required"
@@ -64,6 +65,7 @@ const validate = (body) => {
   }
   if (!body.from) {
     return appError(
+      res,
       400,
       "Payload validation error",
       "Attribute 'from' is required"
@@ -71,6 +73,7 @@ const validate = (body) => {
   }
   if (!body.to) {
     return appError(
+      res,
       400,
       "Payload validation error",
       "Attribute 'to' is required"
@@ -78,6 +81,7 @@ const validate = (body) => {
   }
   if (!body.date || !isValidDateFormat(body.date)) {
     return appError(
+      res,
       400,
       "Payload validation error",
       "Invalid date format. Date must be in YYYY-MM-DD format"
@@ -105,6 +109,7 @@ export const trainLiveStatus = async (req, res) => {
     }
     if (!req.body.trainNumber) {
       return appError(
+        res,
         400,
         "Payload validation error",
         "Attribute 'trainNumber' is required"
