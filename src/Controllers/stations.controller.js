@@ -224,3 +224,17 @@ export const translateText = async (req,res) => {
     return appError(res, 500, error.message, "Internal server error");
   }
 }
+
+export const getLanguages = async (req,res) => {
+  try {
+    const languages = await stations.getLanguages();
+    return appSuccess(
+      res,
+      200,
+      languages,
+      "Languages fetched successfully"
+    );
+  } catch (error) {
+    return appError(res, 500, error.message, "Internal server error");
+  }
+};

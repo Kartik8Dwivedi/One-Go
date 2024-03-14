@@ -30,5 +30,8 @@
 
 - GET TRANSLATED TEXT
     - URL : http://localhost:3007/api/v1/translate
-    - GET request
+    - POST request
     - Body -> from, to and text
+
+- GET ALL LANGUAGES
+    - URL : 

@@ -130,9 +130,28 @@ class Stations {
       };
 
       const response = await axios.request(options);
-      return response.data;
+      return response.data.trans;
     } catch (error) {
       throw new Error(error);
+    }
+  }
+
+  async getLanguages(){
+    try {
+      const options = {
+        method: "GET",
+        url: Config.LanguagesURI,
+        headers: {
+          "X-RapidAPI-Key": Config.TranslateKEY,
+          "X-RapidAPI-Host": Config.TranslateHost,
+        },
+      };
+
+      const response = await axios.request(options);
+
+      return response.data;
+    } catch (error) {
+       throw new Error(error);
     }
   }
 }
