@@ -46,3 +46,7 @@
                                       "author": "Kartik Dwivedi"
                                   }
                                 )
+
+Translate Api: https://rapidapi.com/undergroundapi-undergroundapi-default/api/google-translate113
+
+IRCTC Api: https://rapidapi.com/IRCTCAPI/api/irctc1/
