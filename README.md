@@ -27,3 +27,8 @@
     - URL : http://localhost:3007/api/v1/autocomplete
     - GET request
     - Body -> query (example: Delh -> provides result for delhi)
+
+- GET TRANSLATED TEXT
+    - URL : http://localhost:3007/api/v1/translate
+    - GET request
+    - Body -> from, to and text

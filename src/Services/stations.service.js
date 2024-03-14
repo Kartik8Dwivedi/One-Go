@@ -91,8 +91,6 @@ class Stations {
 
   async autocomplete(query){
     try {
-        console.log("query in service layer: ", query)
-        console.log("typeof query: ", typeof query)
         const options = {
           method: "GET",
           url: Config.AutoCompleteURI,
@@ -111,6 +109,30 @@ class Stations {
         return response.data.predictions;
     } catch (error) {
         throw new Error(error);
+    }
+  }
+
+  async translate({from, to, text}){
+    try {
+      const encodedParams = new URLSearchParams();
+      encodedParams.set("from", from);
+      encodedParams.set("to", to);
+      encodedParams.set("text", text);
+      const options = {
+        method: "POST",
+        url: Config.TranslateURI,
+        headers: {
+          "content-type": "application/x-www-form-urlencoded",
+          "X-RapidAPI-Key": Config.TranslateKEY,
+          "X-RapidAPI-Host": Config.TranslateHost,
+        },
+        data: encodedParams,
+      };
+
+      const response = await axios.request(options);
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
     }
   }
 }

@@ -189,3 +189,38 @@ export const autocomplete = async (req, res) => {
     return appError(res, 500, error.message, "Internal server error");
   }
 };
+
+export const translateText = async (req,res) => {
+  try {
+    if(!req.body.from){
+      req.body.from = "en";
+    }
+    if (!req.body || Object.keys(req.body).length === 0) {
+      console.log("Request body was empty, returning from controller layer");
+      return appError(
+        res,
+        400,
+        "Request body is empty",
+        "from, to and text attribute are required"
+      );
+    }
+    if (!req.body.from || !req.body.to || !req.body.text) {
+      return appError(
+        res,
+        400,
+        "Payload validation error",
+        "Attributes from, to and text are required"
+      );
+    }
+
+    const translatedResponse = await stations.translate(req.body);
+    return appSuccess(
+      res,
+      200,
+      translatedResponse,
+      "Translation fetched successfully"
+    );
+  } catch (error) {
+    return appError(res, 500, error.message, "Internal server error");
+  }
+}
